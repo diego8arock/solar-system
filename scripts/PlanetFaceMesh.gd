@@ -30,8 +30,9 @@ func regenerate_mesh(planet_data : PlanetData):
 			var i : int = x + y * resolution
 			var percent = Vector2(x,y) / (resolution-1)
 			var pointOnUnitCube : Vector3 = normal + (percent.x-0.5) * 2.0 * axisA + (percent.y-0.5) * 2.0 * axisB
-			var pointOnUnitShpere = pointOnUnitCube.normalized() * planet_data.radius
-			vertex_array[i] = pointOnUnitShpere
+			var pointOnUnitShpere = pointOnUnitCube.normalized()
+			var pointOnPlanet = planet_data.point_on_planet(pointOnUnitShpere)
+			vertex_array[i] = pointOnPlanet
 			if x!= resolution-1 and y != resolution-1:
 				index_array[tri_index+2] = i
 				index_array[tri_index+1] = i+resolution+1
