@@ -1,10 +1,10 @@
+@tool
 extends MeshInstance3D
 class_name PlanetFaceMesh
 
 @export var normal : Vector3
 
-func regenerate_mesh():
-	
+func regenerate_mesh(planet_data : PlanetData):
 	var arrays = []
 	arrays.resize(Mesh.ARRAY_MAX)
 	
@@ -13,14 +13,14 @@ func regenerate_mesh():
 	var normal_array = PackedVector3Array()
 	var index_array = PackedInt32Array()
 	
-	var resolution = 5
-	var nume_vertices : int = resolution * resolution
+	var resolution = planet_data.resolution
+	var num_vertices : int = resolution * resolution
 	var num_indices : int = (resolution -1) * (resolution-1) * 6
 	
-	vertex_array.resize(nume_vertices)
-	uv_array.resize(nume_vertices)
-	normal_array.resize(nume_vertices)
-	index_array.resize(nume_vertices)
+	vertex_array.resize(num_vertices)
+	uv_array.resize(num_vertices)
+	normal_array.resize(num_vertices)
+	index_array.resize(num_indices)
 	
 	var tri_index : int = 0
 	var axisA = Vector3(normal.y, normal.z, normal.x)
@@ -30,7 +30,7 @@ func regenerate_mesh():
 			var i : int = x + y * resolution
 			var percent = Vector2(x,y) / (resolution-1)
 			var pointOnUnitCube : Vector3 = normal + (percent.x-0.5) * 2.0 * axisA + (percent.y-0.5) * 2.0 * axisB
-			var pointOnUnitShpere : = pointOnUnitCube.normalized()
+			var pointOnUnitShpere = pointOnUnitCube.normalized() * planet_data.radius
 			vertex_array[i] = pointOnUnitShpere
 			if x!= resolution-1 and y != resolution-1:
 				index_array[tri_index+2] = i
@@ -45,9 +45,9 @@ func regenerate_mesh():
 	for a in range(0, index_array.size(),3):
 		var b : int = a + 1
 		var c : int = a + 2
-		var ab : Vector3 = vertex_array[index_array[b] - vertex_array[index_array[a]]]
-		var bc : Vector3 = vertex_array[index_array[c] - vertex_array[index_array[b]]]
-		var ca : Vector3 = vertex_array[index_array[a] - vertex_array[index_array[c]]]
+		var ab : Vector3 = vertex_array[index_array[b]] - vertex_array[index_array[a]]
+		var bc : Vector3 = vertex_array[index_array[c]] - vertex_array[index_array[b]]
+		var ca : Vector3 = vertex_array[index_array[a]] - vertex_array[index_array[c]]
 		var cross_ab_bc : Vector3 = ab.cross(bc) * -1
 		var cross_bc_ca : Vector3 = bc.cross(ca) * -1
 		var cross_ca_ab : Vector3 = ca.cross(ab) * -1
@@ -68,6 +68,6 @@ func regenerate_mesh():
 func _update_mesh(arrays : Array):
 	var _mesh = ArrayMesh.new()
 	_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-	self.mehs = _mesh
+	self.mesh = _mesh
 	
 	
