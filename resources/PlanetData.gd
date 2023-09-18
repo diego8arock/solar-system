@@ -5,9 +5,17 @@ class_name PlanetData
 @export var radius : int = 1 : set = set_radius
 @export var resolution = 10 : set = set_resolution
 @export var planet_noise : Array[PlanetNoise] : set = set_planet_noise
+@export var planet_color : GradientTexture1D : set = set_planet_color
+
+var min_height = 99999.0
+var max_height = 0.0
 
 func set_radius(val):
 	radius = val
+	emit_changed()
+	
+func set_planet_color(val):
+	planet_color = val
 	emit_changed()
 	
 func set_resolution(val):

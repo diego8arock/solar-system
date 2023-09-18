@@ -15,6 +15,8 @@ func _ready():
 
 func on_data_changed():
 	if planet_data != null:
+		planet_data.min_height = 99999.9
+		planet_data.max_height = 0.0
 		print("Regenerate sphere...")
 		for child in get_children():
 			var face = child as PlanetFaceMesh
