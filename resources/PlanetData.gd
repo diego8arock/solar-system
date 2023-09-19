@@ -52,6 +52,6 @@ func point_on_planet(point_on_sphere : Vector3) -> Vector3:
 		if n!= null and n.noise_map != null:
 			level_elevation = n.noise_map.get_noise_3dv(point_on_sphere * 100.0)
 			level_elevation = (level_elevation + 1.0) / 2.0 * n.amplitude
-			level_elevation = max(0.0, level_elevation - n.min_height) *mask
+			level_elevation = max(0.0, level_elevation - n.min_height) * mask
 		elevation += level_elevation
 	return point_on_sphere * radius * (elevation+1.0)

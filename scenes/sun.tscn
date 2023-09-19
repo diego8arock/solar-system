@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://dev83rc5iusfj"]
+
+[ext_resource type="Shader" path="res://shaders/sun_material.gdshader" id="1_rppxl"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_td08w"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_v8pki"]
+noise = SubResource("FastNoiseLite_td08w")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5uv1t"]
+noise_type = 5
+frequency = 0.033
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mg2d6"]
+noise = SubResource("FastNoiseLite_5uv1t")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ehkly"]
+render_priority = 0
+shader = ExtResource("1_rppxl")
+shader_parameter/Glow_Power = 8.701
+shader_parameter/Lightness_Difference = 4.803
+shader_parameter/Sun_Color = Color(0.988235, 0.462745, 0, 1)
+shader_parameter/waveSpeed = 0.524
+shader_parameter/fresnel = 1.155
+shader_parameter/scale = 1.175
+shader_parameter/blendSharpness = 0.0
+shader_parameter/voronoi_noise = SubResource("NoiseTexture2D_mg2d6")
+shader_parameter/emission_noise = SubResource("NoiseTexture2D_v8pki")
+
+[sub_resource type="SphereMesh" id="SphereMesh_fg4p2"]
+radius = 10.0
+height = 20.0
+
+[node name="Sun" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_ehkly")
+mesh = SubResource("SphereMesh_fg4p2")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+omni_range = 58.168
+omni_attenuation = 0.0980731

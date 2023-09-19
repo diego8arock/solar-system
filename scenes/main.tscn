@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://bscdwhvp6u8yi"]
+
+[ext_resource type="PackedScene" uid="uid://t6dt2ki3ng2x" path="res://scenes/planet.tscn" id="1_125ea"]
+[ext_resource type="Texture2D" uid="uid://crgng204sifth" path="res://assets/SpaceBackGround.jpg" id="1_r6ar7"]
+[ext_resource type="PackedScene" uid="uid://dev83rc5iusfj" path="res://scenes/sun.tscn" id="2_yuc4n"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_owidi"]
+panorama = ExtResource("1_r6ar7")
+
+[sub_resource type="Sky" id="Sky_hsefk"]
+sky_material = SubResource("PanoramaSkyMaterial_owidi")
+
+[sub_resource type="Environment" id="Environment_uyim3"]
+background_mode = 2
+sky = SubResource("Sky_hsefk")
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_uyim3")
+
+[node name="Planet" parent="." instance=ExtResource("1_125ea")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 185.793, 0, 0)
+
+[node name="Sun" parent="." instance=ExtResource("2_yuc4n")]
+
+[node name="OmniLight3D" parent="Sun" index="1"]
+omni_range = 346.537
+omni_attenuation = 0.101532
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.965926, -0.183013, 0.183013, 0.12941, 0.953879, 0.270866, -0.224144, -0.237953, 0.94506, 265, 183, 394)
+keep_aspect = 0
+
+[editable path="Sun"]
