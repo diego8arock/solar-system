@@ -1,7 +1,10 @@
 @tool
-extends Node3D
+extends RigidBody3D
+class_name Planet
 
+@export var celestial_body_data : CelestialBodyData
 @export var planet_data : PlanetData : set = set_planet_data
+
 
 func set_planet_data(val):
 	planet_data = val
@@ -11,6 +14,8 @@ func set_planet_data(val):
 		planet_data.changed.connect(callable)
 
 func _ready():
+	linear_velocity = Vector3(0, 0, celestial_body_data.initial_linear_velocity)
+	print(linear_velocity)
 	on_data_changed()
 
 func on_data_changed():
@@ -19,6 +24,7 @@ func on_data_changed():
 		planet_data.max_height = 0.0
 		print("Regenerate sphere...")
 		for child in get_children():
-			var face = child as PlanetFaceMesh
-			face.regenerate_mesh(planet_data)
+			if child is PlanetFaceMesh:
+				var face = child as PlanetFaceMesh
+				face.regenerate_mesh(planet_data)
 

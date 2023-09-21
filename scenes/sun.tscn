@@ -1,6 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://dev83rc5iusfj"]
+[gd_scene load_steps=12 format=3 uid="uid://dev83rc5iusfj"]
 
+[ext_resource type="Script" path="res://scripts/Sun.gd" id="1_bnep5"]
 [ext_resource type="Shader" path="res://shaders/sun_material.gdshader" id="1_rppxl"]
+[ext_resource type="Script" path="res://resources/CelestialBodyData.gd" id="2_ienfh"]
+
+[sub_resource type="Resource" id="Resource_e2auq"]
+script = ExtResource("2_ienfh")
+type = 0
+mass = 10.0
+initial_linear_velocity = null
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_td08w"]
 noise_type = 3
@@ -32,7 +40,12 @@ shader_parameter/emission_noise = SubResource("NoiseTexture2D_v8pki")
 radius = 10.0
 height = 20.0
 
-[node name="Sun" type="Node3D"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_3h7rm"]
+radius = 10.0
+
+[node name="Sun" type="StaticBody3D"]
+script = ExtResource("1_bnep5")
+celestial_body_data = SubResource("Resource_e2auq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 material_override = SubResource("ShaderMaterial_ehkly")
@@ -41,3 +54,6 @@ mesh = SubResource("SphereMesh_fg4p2")
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 omni_range = 58.168
 omni_attenuation = 0.0980731
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_3h7rm")
