@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://bfetqp78tltf5"]
+[gd_scene load_steps=14 format=3 uid="uid://bfetqp78tltf5"]
 
 [ext_resource type="Script" path="res://sandbox/sand_box.gd" id="1_v5fgr"]
+[ext_resource type="Script" path="res://sandbox/Camera3D.gd" id="2_kqh5b"]
 
 [sub_resource type="Environment" id="Environment_c75ap"]
 
@@ -9,6 +10,18 @@ radius = 20.0
 height = 40.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_nf4tb"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_4hkl6"]
+radius = 8.0
+height = 10.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2epra"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_vqrqx"]
+radius = 12.0
+height = 24.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_w5uxv"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_dk8jk"]
 radius = 15.0
@@ -24,9 +37,7 @@ height = 4.0
 
 [node name="SandBox" type="Node3D"]
 script = ExtResource("1_v5fgr")
-is_eliptical_orbit = false
-G = 1000.0
-earth_mass = 150.0
+mass_multiplier = 0.01
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_c75ap")
@@ -41,8 +52,27 @@ mesh = SubResource("SphereMesh_06st6")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sun"]
 shape = SubResource("SphereShape3D_nf4tb")
 
+[node name="Mercury" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 637.834, 0, 0)
+gravity_scale = 0.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mercury"]
+mesh = SubResource("SphereMesh_4hkl6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mercury"]
+shape = SubResource("SphereShape3D_2epra")
+
+[node name="Venus" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1500, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Venus"]
+mesh = SubResource("SphereMesh_vqrqx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Venus"]
+shape = SubResource("SphereShape3D_w5uxv")
+
 [node name="Earth" type="RigidBody3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1500, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2500, 0, 0)
 gravity_scale = 0.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Earth"]
@@ -55,7 +85,7 @@ shape = SubResource("SphereShape3D_u586g")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 9, 208, 0)
 
 [node name="Moon" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1522, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2522, 0, 0)
 gravity_scale = 0.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Moon"]
@@ -65,56 +95,11 @@ mesh = SubResource("SphereMesh_ub5qi")
 shape = SubResource("SphereShape3D_nqq47")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4400, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 6000, 0)
 current = true
 fov = 37.8493
-far = 7000.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Camera3D"]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Camera3D/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Camera3D/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "EARTH FORCE"
-
-[node name="LabelEarthForce" type="Label" parent="Camera3D/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="Camera3D/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Camera3D/VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-text = "EARTH LINEAR VELOCITY"
-
-[node name="LabelEarthLinear" type="Label" parent="Camera3D/VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="Camera3D/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Camera3D/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-text = "SUN FORCE"
-
-[node name="LabelSunForce" type="Label" parent="Camera3D/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-text = "TEXT LABEL"
-
-[node name="HBoxContainer4" type="HBoxContainer" parent="Camera3D/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Camera3D/VBoxContainer/HBoxContainer4"]
-layout_mode = 2
-text = "SUN LINEAR VELOCITY"
-
-[node name="LabelSunLinear" type="Label" parent="Camera3D/VBoxContainer/HBoxContainer4"]
-layout_mode = 2
-text = "TEXT LABEL"
+far = 8000.0
+script = ExtResource("2_kqh5b")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 13.9844, 0)
