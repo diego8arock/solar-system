@@ -99,8 +99,8 @@ func spawn_asteroids():
 	var density = 50
 	
 	var height = 100
-	var inner_radius = 1700.0
-	var outer_radius = 2000.0
+	var inner_radius = 5250.0
+	var outer_radius = 8250.0
 	var random_radius
 	var ranodm_radian
 	
@@ -140,3 +140,7 @@ func print_info():
 	print("linear velocity: %s" % moon.linear_velocity)
 	print("mass: %f" % moon.mass)
 	print("\n")
+
+func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		get_tree().quit()

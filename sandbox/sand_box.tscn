@@ -53,7 +53,7 @@ mesh = SubResource("SphereMesh_06st6")
 shape = SubResource("SphereShape3D_nf4tb")
 
 [node name="Mercury" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 637.834, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 975, 0, 0)
 gravity_scale = 0.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Mercury"]
@@ -63,7 +63,7 @@ mesh = SubResource("SphereMesh_4hkl6")
 shape = SubResource("SphereShape3D_2epra")
 
 [node name="Venus" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1500, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1800, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Venus"]
 mesh = SubResource("SphereMesh_vqrqx")
@@ -81,9 +81,6 @@ mesh = SubResource("SphereMesh_dk8jk")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Earth"]
 shape = SubResource("SphereShape3D_u586g")
 
-[node name="Camera3D" type="Camera3D" parent="Earth"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 9, 208, 0)
-
 [node name="Moon" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2522, 0, 0)
 gravity_scale = 0.0
@@ -94,11 +91,59 @@ mesh = SubResource("SphereMesh_ub5qi")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Moon"]
 shape = SubResource("SphereShape3D_nqq47")
 
+[node name="Mars" type="RigidBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3800, 0, 0)
+gravity_scale = 0.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mars"]
+mesh = SubResource("SphereMesh_dk8jk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mars"]
+shape = SubResource("SphereShape3D_u586g")
+
+[node name="Jupiter" type="RigidBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 13000, 0, 0)
+gravity_scale = 0.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Jupiter"]
+mesh = SubResource("SphereMesh_dk8jk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Jupiter"]
+shape = SubResource("SphereShape3D_u586g")
+
+[node name="Saturn" type="RigidBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 23950, 0, 0)
+gravity_scale = 0.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Saturn"]
+mesh = SubResource("SphereMesh_dk8jk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Saturn"]
+shape = SubResource("SphereShape3D_u586g")
+
+[node name="Uranus" type="RigidBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 48050, 0, 0)
+gravity_scale = 0.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Uranus"]
+mesh = SubResource("SphereMesh_dk8jk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Uranus"]
+shape = SubResource("SphereShape3D_u586g")
+
+[node name="Neptune" type="RigidBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 75125, 0, 0)
+gravity_scale = 0.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Neptune"]
+mesh = SubResource("SphereMesh_dk8jk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Neptune"]
+shape = SubResource("SphereShape3D_u586g")
+
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 6000, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -117.613, 0, 0)
 current = true
-fov = 37.8493
-far = 8000.0
 script = ExtResource("2_kqh5b")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
