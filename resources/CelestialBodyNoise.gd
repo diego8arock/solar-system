@@ -1,6 +1,6 @@
 @tool
 extends Resource
-class_name PlanetNoise
+class_name CelestialBodyNoise
 
 @export var noise_map : FastNoiseLite : set = set_noise_map
 @export var amplitude : float = 1.0 : set = set_amplitude

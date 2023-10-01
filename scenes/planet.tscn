@@ -1,47 +1,13 @@
-[gd_scene load_steps=23 format=3 uid="uid://t6dt2ki3ng2x"]
+[gd_scene load_steps=14 format=3 uid="uid://t6dt2ki3ng2x"]
 
 [ext_resource type="Script" path="res://scripts/Planet.gd" id="1_8upj2"]
-[ext_resource type="Script" path="res://resources/PlanetData.gd" id="2_6d4t4"]
-[ext_resource type="Script" path="res://scripts/PlanetFaceMesh.gd" id="2_7lvf2"]
-[ext_resource type="Script" path="res://resources/CelestialBodyData.gd" id="2_hm4u3"]
-[ext_resource type="Script" path="res://resources/PlanetNoise.gd" id="2_lnw33"]
+[ext_resource type="Script" path="res://scripts/CelestialBodyFaceMesh.gd" id="2_7lvf2"]
 [ext_resource type="Shader" path="res://shaders/planet_material.gdshader" id="4_brfyy"]
-
-[sub_resource type="Resource" id="Resource_273v8"]
-script = ExtResource("2_hm4u3")
-type = 0
-mass = 1.0
-initial_linear_velocity = 15.0
 
 [sub_resource type="Gradient" id="Gradient_diipj"]
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_g66s3"]
 gradient = SubResource("Gradient_diipj")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_56p1x"]
-
-[sub_resource type="Resource" id="Resource_a1pxj"]
-script = ExtResource("2_lnw33")
-noise_map = SubResource("FastNoiseLite_56p1x")
-amplitude = 1.0
-min_height = 1.0
-use_first_layer_as_mask = false
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_nvhp6"]
-
-[sub_resource type="Resource" id="Resource_j4r8f"]
-script = ExtResource("2_lnw33")
-noise_map = SubResource("FastNoiseLite_nvhp6")
-amplitude = 1.0
-min_height = 1.0
-use_first_layer_as_mask = false
-
-[sub_resource type="Resource" id="Resource_m3ij1"]
-script = ExtResource("2_6d4t4")
-radius = 10
-resolution = 10
-planet_noise = Array[ExtResource("2_lnw33")]([SubResource("Resource_a1pxj"), SubResource("Resource_j4r8f")])
-planet_color = SubResource("GradientTexture1D_g66s3")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tlree"]
 render_priority = 0
@@ -127,8 +93,6 @@ radius = 10.0
 
 [node name="Planet" type="RigidBody3D"]
 script = ExtResource("1_8upj2")
-celestial_body_data = SubResource("Resource_273v8")
-planet_data = SubResource("Resource_m3ij1")
 
 [node name="Up" type="MeshInstance3D" parent="."]
 material_override = SubResource("ShaderMaterial_tlree")

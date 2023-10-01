@@ -1,5 +1,5 @@
 @tool
-extends StaticBody3D
+extends RigidBody3D
 class_name Sun
 
-@export var celestial_body_data : CelestialBodyData
+@export var planet_physics_data : CelestialBodyPhysicsData

@@ -1,10 +1,10 @@
 @tool
 extends Resource
-class_name PlanetData
+class_name CelestialBodyPaintData
 
 @export var radius : int = 1 : set = set_radius
 @export var resolution = 10 : set = set_resolution
-@export var planet_noise : Array[PlanetNoise] : set = set_planet_noise
+@export var planet_noise : Array[CelestialBodyNoise] : set = set_planet_noise
 @export var planet_color : GradientTexture1D : set = set_planet_color
 
 var min_height = 99999.0
@@ -27,7 +27,7 @@ func set_planet_noise(val):
 	var callable = Callable(self,"on_data_changed")
 	for i in range(planet_noise.size()):
 		if planet_noise[i] == null:
-			planet_noise[i] = PlanetNoise.new()
+			planet_noise[i] = CelestialBodyNoise.new()
 		if planet_noise[i] != null and not planet_noise[i].changed.is_connected(callable):
 			planet_noise[i].changed.connect(callable)
 		if planet_noise[i].noise_map == null:

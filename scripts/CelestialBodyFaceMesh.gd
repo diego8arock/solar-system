@@ -1,10 +1,10 @@
 @tool
 extends MeshInstance3D
-class_name PlanetFaceMesh
+class_name CelestialBodyFaceMesh
 
 @export var normal : Vector3
 
-func regenerate_mesh(planet_data : PlanetData):
+func regenerate_mesh(planet_data : CelestialBodyPaintData):
 	var arrays = []
 	arrays.resize(Mesh.ARRAY_MAX)
 	
@@ -73,7 +73,7 @@ func regenerate_mesh(planet_data : PlanetData):
 	
 	call_deferred("_update_mesh", arrays, planet_data)
 				
-func _update_mesh(arrays : Array, planet_data : PlanetData):
+func _update_mesh(arrays : Array, planet_data : CelestialBodyPaintData):
 	var _mesh = ArrayMesh.new()
 	_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	self.mesh = _mesh
